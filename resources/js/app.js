@@ -4,6 +4,14 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { ZiggyVue } from 'ziggy-js';
 import Layout from "./Layouts/Main.vue";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+
+library.add(fas, far, fab)
+
 createInertiaApp({
   title: title => `${title} | My App`,
   resolve: name => {
@@ -16,11 +24,11 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(ZiggyVue)
+      .component("font-awesome-icon", FontAwesomeIcon)
       .mount(el)
   },
   progress: {
-    // Whether the NProgress spinner will be shown...
     showSpinner: true,
-    delay:250,
+    delay: 250,
   },
 })
