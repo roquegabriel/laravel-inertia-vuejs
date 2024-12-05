@@ -13,11 +13,12 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-                montserrat:["Montserrat", 'sans-serif']
+                montserrat: ["Montserrat", 'sans-serif']
             },
         },
     },
     plugins: [
         require('@tailwindcss/forms'),
     ],
+    darkMode: 'selector',
 };
