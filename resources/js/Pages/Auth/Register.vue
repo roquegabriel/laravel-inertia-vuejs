@@ -4,7 +4,7 @@ import Title from '../../Components/Title.vue';
 import Container from '../../Components/Container.vue';
 import InputField from '../../Components/InputField.vue';
 import PrimaryBtn from '../../Components/PrimaryBtn.vue';
-import { useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import ErrorMessages from '../../Components/ErrorMessages.vue';
 
 const form = useForm({
@@ -21,11 +21,12 @@ const submit = () => {
 }
 </script>
 <template>
+        <Head :title="$page.component.split('/')[1]" />
         <Container class="w-1/2">
                 <div class="mb-8 text-center">
                         <Title>Register a new account</Title>
                         <p>Already have an acount?
-                                <TextLink routeName="home" label="Login" />
+                                <TextLink routeName="login" label="Login" />
                         </p>
                 </div>
 
