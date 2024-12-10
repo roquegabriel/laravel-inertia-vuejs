@@ -31,7 +31,9 @@ const show = ref(false)
                     <!-- User dropdown menu -->
                     <div v-show="show" @click="show = false"
                         class="bg-slate-800 absolute z-50 top-16 righ-0 border overflow-hidden w-40 rounded-lg">
-                        <Link class="block w-full px-6 py-3 hover:bg-slate-700 text-left" :href="route('home')">
+                        <Link class="block w-full px-6 py-3 hover:bg-slate-700 text-left" :href="route('profile.edit')">
+                        Profile</Link>
+                        <Link class="block w-full px-6 py-3 hover:bg-slate-700 text-left" :href="route('dashboard')">
                         Dashboard</Link>
                         <Link as="button" method="post" :href="route('logout')"
                             class="block w-full px-6 py-3 hover:bg-slate-700 text-left">Logout</Link>
