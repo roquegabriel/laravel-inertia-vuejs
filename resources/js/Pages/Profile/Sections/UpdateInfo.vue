@@ -28,7 +28,7 @@ const resendEmail = (e) => {
             <p>Update your account's profile information and email address.</p>
         </div>
         <ErrorMessages :errors="form.errors" />
-        <form @submit.prevent="form.patch(route('profile.update'))" class="space-y-6">
+        <form @submit.prevent="form.patch(route('profile.updateInfo'))" class="space-y-6">
             <InputField label="Name" icon="id-badge" class="w-1/2" v-model="form.name" />
             <InputField label="Email" icon="at" class="w-1/2" v-model="form.email" />
 
