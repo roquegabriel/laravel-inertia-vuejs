@@ -1,15 +1,21 @@
 <script setup>
 import { Head } from '@inertiajs/vue3'
+import Card from '../Components/Card.vue';
+defineProps({
+    listings: Object,
+})
+
 </script>
 <template>
 
-    <Head title="Home" />
-    <h1 class="text-3xl text-center">Welcome!</h1>
-    <!-- explicit style -->
-    <font-awesome-icon :icon="['fas', 'phone']" />
+    <Head title=" Latest Listings" />
 
-    <!-- implicit style (fas is assumed) -->
-    <font-awesome-icon icon="phone" />
-
-
+    <div v-if="Object.keys(listings.data).length">
+        <div class="grid grid-cols-3 gap-4">
+            <div v-for="(listing, index) in listings.data" :key="index">
+                <Card :listing="listing" />
+            </div>
+        </div>
+    </div>
+    
 </template>
