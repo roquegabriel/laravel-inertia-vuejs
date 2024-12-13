@@ -13,7 +13,7 @@ defineProps({
     <Head title=" Latest Listings" />
 
     <div v-if="Object.keys(listings.data).length">
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div v-for="(listing, index) in listings.data" :key="index">
                 <Card :listing="listing" />
             </div>
@@ -21,6 +21,9 @@ defineProps({
         <div class="mt-8">
             <PaginationLinks :paginator="listings" />
         </div>
+    </div>
+    <div v-else>
+        <p>There are no listings</p>
     </div>
 
 </template>
