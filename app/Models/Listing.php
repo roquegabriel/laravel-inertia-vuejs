@@ -38,5 +38,10 @@ class Listing extends Model
             $query
                 ->where('user_id', request('user_id'));
         }
+
+        if ($filters['tag'] ?? false) {
+            $query
+                ->where('tags', 'like', '%' . request('tag') . '%');
+        }
     }
 }
