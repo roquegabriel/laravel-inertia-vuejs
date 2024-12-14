@@ -21,6 +21,7 @@ const submit = () => {
 }
 </script>
 <template>
+
         <Head :title="$page.component.split('/')[1]" />
         <Container class="w-1/2">
                 <div class="mb-8 text-center">
@@ -31,17 +32,17 @@ const submit = () => {
                 </div>
 
                 <!-- Errors messages -->
-                <ErrorMessages :errors="form.errors"/>
-                        <form class="space-y-6" @submit.prevent="submit">
-                                <InputField label="Name" icon="id-badge" v-model="form.name" />
-                                <InputField label="Email" icon="at" v-model="form.email" />
-                                <InputField label="Password" type="password" icon="key" v-model="form.password" />
-                                <InputField label="Confirm Password" type="password" icon="key"
-                                        v-model="form.password_confirmation" />
-                                <p class="text-slate-500 text-sm darK:text-slate-400">
-                                        By creating an account, you agree to our Terms of Service and Privacy Policy.
-                                </p>
-                                <PrimaryBtn :disabled="form.processing">Register</PrimaryBtn>
-                        </form>
+                <ErrorMessages :errors="form.errors" />
+                <form class="space-y-6" @submit.prevent="submit">
+                        <InputField label="Name" icon="id-badge" v-model="form.name" />
+                        <InputField label="Email" icon="at" v-model="form.email" />
+                        <InputField label="Password" type="password" icon="key" v-model="form.password" />
+                        <InputField label="Confirm Password" type="password" icon="key"
+                                v-model="form.password_confirmation" />
+                        <p class="text-slate-500 text-sm darK:text-slate-400">
+                                By creating an account, you agree to our Terms of Service and Privacy Policy.
+                        </p>
+                        <PrimaryBtn :disabled="form.processing">Register</PrimaryBtn>
+                </form>
         </Container>
 </template>
