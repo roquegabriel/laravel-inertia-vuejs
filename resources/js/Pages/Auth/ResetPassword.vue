@@ -5,7 +5,7 @@ import InputField from '../../Components/InputField.vue';
 import PrimaryBtn from '../../Components/PrimaryBtn.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import ErrorMessages from '../../Components/ErrorMessages.vue';
-import Title from '../../Components/Title.vue';
+import Title from '../../Components/HeadingTitle.vue';
 
 const props = defineProps({
     token: String,

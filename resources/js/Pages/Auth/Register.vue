@@ -1,6 +1,6 @@
 <script setup>
 import TextLink from '../../Components/TextLink.vue';
-import Title from '../../Components/Title.vue';
+import Title from '../../Components/HeadingTitle.vue';
 import Container from '../../Components/Container.vue';
 import InputField from '../../Components/InputField.vue';
 import PrimaryBtn from '../../Components/PrimaryBtn.vue';

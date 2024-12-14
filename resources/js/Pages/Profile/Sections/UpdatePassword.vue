@@ -2,7 +2,7 @@
 import Container from "../../../Components/Container.vue";
 import ErrorMessages from "../../../Components/ErrorMessages.vue";
 import SessionMessages from "../../../Components/SessionMessages.vue";
-import Title from "../../../Components/Title.vue";
+import Title from "../../../Components/HeadingTitle.vue";
 import InputField from "../../../Components/InputField.vue";
 import PrimaryBtn from "../../../Components/PrimaryBtn.vue";
 import { useForm } from "@inertiajs/vue3";

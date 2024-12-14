@@ -1,13 +1,8 @@
 <script setup>
-import TextLink from '../../Components/TextLink.vue';
-import Title from '../../Components/Title.vue';
-import Container from '../../Components/Container.vue';
 import InputField from '../../Components/InputField.vue';
 import PrimaryBtn from '../../Components/PrimaryBtn.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import ErrorMessages from '../../Components/ErrorMessages.vue';
-import CheckBox from '../../Components/CheckBox.vue';
-import SessionMessages from '../../Components/SessionMessages.vue';
 
 defineProps({ status: String })
 
