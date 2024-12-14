@@ -21,7 +21,7 @@ const imageSelected = (e) => {
         </span>
         <label :class="{ '!border-red-500': oversizedImage }" for="image"
             class="block rounded-md mt-1 bg-slate-300 h-[140px] overflow-hidden cursor-pointer border-slate-300 border">
-            <img :src="preview ?? '/storage/images/listing/default.png'" class="object-contain h-full w-full" alt="">
+            <img :src="preview ?? '/storage/images/listing/default.png'" class="object-cover object-center h-full w-full" alt="">
         </label>
         <input @input="imageSelected" type="file" name="image" id="image" hidden>
     </div>

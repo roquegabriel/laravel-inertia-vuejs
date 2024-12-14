@@ -27,7 +27,7 @@ const selectTag = (tag) => {
             <!-- Image -->
             <Link href="">
             <img :src="listing.image ? `/storage/${listing.image}` : `/storage/images/listing/default.png`"
-                :alt="listing.image" class="w-full h-48 object-contain object-center bg-slate-300">
+                :alt="listing.image" class="w-full h-48 object-cover object-center bg-slate-300">
             </Link>
 
             <!-- Title & user -->
