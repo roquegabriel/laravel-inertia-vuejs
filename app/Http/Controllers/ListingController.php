@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\NotSuspended;
 use App\Models\Listing;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
-class ListingController extends Controller
+class ListingController extends Controller implements HasMiddleware
 {
+
+    public static function middleware()
+    {
+        return [new Middleware(['auth', 'verified', NotSuspended::class], except: ['index', 'show'])];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,6 +48,7 @@ class ListingController extends Controller
     public function create()
     {
         //
+        Gate::authorize('create', Listing::class);
         return Inertia::render('Listing/Create');
     }
 
@@ -47,12 +58,13 @@ class ListingController extends Controller
     public function store(Request $request): RedirectResponse
     {
         //
-        $newTags = explode(',', $request->tags);
-        $newTags = array_map('trim', $newTags);
-        $newTags = array_filter($newTags);
-        $newTags = array_unique($newTags);
-        $newTags = implode(',', $newTags);
+        Gate::authorize('create', Listing::class);
 
+        // $newTags = explode(',', $request->tags);
+        // $newTags = array_map('trim', $newTags);
+        // $newTags = array_filter($newTags);
+        // $newTags = array_unique($newTags);
+        // $newTags = implode(',', $newTags);
 
         $fields = $request->validate([
             'title' => 'required|max:255',
@@ -80,9 +92,11 @@ class ListingController extends Controller
     public function show(Listing $listing)
     {
         //
+        Gate::authorize('view', $listing);
         return Inertia::render('Listing/Show', [
             'listing' => $listing,
             'user' => $listing->user->only(['name', 'id']),
+            'canModify' => Auth::user() ? Auth::user()->can('update', $listing) : false,
         ]);
     }
 
@@ -92,6 +106,7 @@ class ListingController extends Controller
     public function edit(Listing $listing)
     {
         //
+        Gate::authorize('update', $listing);
         return Inertia::render('Listing/Edit', [
             'listing' => $listing,
         ]);
@@ -103,6 +118,8 @@ class ListingController extends Controller
     public function update(Request $request, Listing $listing)
     {
         //
+        Gate::authorize('update', $listing);
+
         $fields = $request->validate([
             'title' => 'required|max:255',
             'desc' => 'required',
@@ -134,7 +151,9 @@ class ListingController extends Controller
      */
     public function destroy(Listing $listing)
     {
-        //
+        //        
+        Gate::authorize('delete', $listing);
+
         if ($listing->image) {
             Storage::disk('public')->delete($listing->image);
         }
