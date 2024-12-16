@@ -9,8 +9,12 @@ use Inertia\Response;
 class DashboardController extends Controller
 {
     //
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return Inertia::render('Dashboard');
+        $listing = $request->user()->role !== 'suspended' ?  $request->user()->listing()->latest()->paginate() : null;
+        return Inertia::render('Dashboard', [
+            'listings' => $listing,
+            'status' => session('status')
+        ]); 
     }
 }
