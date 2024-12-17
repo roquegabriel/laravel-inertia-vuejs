@@ -1,14 +1,18 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import PaginationLinks from '../../Components/PaginationLinks.vue'
+import RoleSelect from '../../Components/RoleSelect.vue';
+import SessionMessages from '../../Components/SessionMessages.vue'
 defineProps({
     users: Object,
+    status: String
 })
 
 </script>
 <template>
 
     <Head title="Admin" />
+    <SessionMessages :status="status" />
     <!-- Heading -->
     <div>Heading</div>
     <!-- Table -->
@@ -28,12 +32,13 @@ defineProps({
                     <p class="font-light text-xs">{{ user.email }}</p>
                 </td>
                 <td class="w-2/6 py-5 px-3">
-                    {{ user.role }}
+                    <!-- {{ user.role }} -->
+                    <RoleSelect :user="user" />
                 </td>
                 <td class="w-1/5 py-5 px-3">
                     <div class="flex items-center gap-6">
                         <div class="flex items-center gap-1">
-                            <p>{{user.listings.filter((i) => i.approved).length}}</p>
+                            <p>{{ user.listings.filter((i) => i.approved).length }}</p>
                             <font-awesome-icon icon="circle-check" class="text-green-500" />
                         </div>
                         <div class="flex items-center gap-1">
