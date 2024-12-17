@@ -21,20 +21,26 @@ const show = ref(false)
                 Home
             </NavLink>
             <div class="flex items-center space-x-6">
-                <div v-if="user" class="relative">
+                <!-- Auth -->
+                <div v-if="user" class="relative flex items-center gap-4">
                     <div @click="show = !show"
                         class="flex items-center gap-2 px-3 py-1 rounded-lg hover:bg-slate-700 cursor-pointer"
                         :class="{ 'bg-slate-700': show }">
                         <p>{{ user.name }}</p>
                         <font-awesome-icon icon="angle-down" />
                     </div>
+                    <Link v-if="user.role === 'admin'" :href="route('admin.index')"
+                        class="hover:bg-slate-700 size-6 grid place-content-center  rounded-full hover:outline outline-1 outline-white">
+                    <font-awesome-icon icon="lock" />
+                    </Link>
                     <!-- User dropdown menu -->
                     <div v-show="show" @click="show = false"
                         class="bg-slate-800 absolute z-50 top-16 righ-0 border overflow-hidden w-40 rounded-lg">
                         <Link class="block w-full px-6 py-3 hover:bg-slate-700 text-left" :href="route('profile.edit')">
                         Profile</Link>
-                        <Link class="block w-full px-6 py-3 hover:bg-slate-700 text-left" :href="route('listing.create')">
-                            New Listing</Link>
+                        <Link class="block w-full px-6 py-3 hover:bg-slate-700 text-left"
+                            :href="route('listing.create')">
+                        New Listing</Link>
                         <Link class="block w-full px-6 py-3 hover:bg-slate-700 text-left" :href="route('dashboard')">
                         Dashboard</Link>
                         <Link as="button" method="post" :href="route('logout')"
