@@ -48,7 +48,7 @@ const show = ref(false)
                     </div>
                 </div>
                 <!-- Guest -->
-                <div v-else class="space-x-6">
+                <div v-else class="md:space-x-6">
                     <NavLink routeName="login" componentName="Auth/Login">
                         Login
                     </NavLink>

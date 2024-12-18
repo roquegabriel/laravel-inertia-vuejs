@@ -23,7 +23,7 @@ const submit = () => {
 <template>
 
         <Head :title="$page.component.split('/')[1]" />
-        <Container class="w-1/2">
+        <Container class="w-full md:w-1/2">
                 <div class="mb-8 text-center">
                         <Title>Register a new account</Title>
                         <p>Already have an acount?
