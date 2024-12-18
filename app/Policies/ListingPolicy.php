@@ -8,6 +8,13 @@ use Illuminate\Auth\Access\Response;
 
 class ListingPolicy
 {
+    public function before(User $user)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+        return null;
+    }
     /**
      * Determine whether the user can view any models.
      */
@@ -46,6 +53,11 @@ class ListingPolicy
     public function delete(User $user, Listing $listing): bool
     {
         return $user->id === $listing->user_id && $user->role !== 'suspended';
+    }
+
+    public function approve(User $user, Listing $listing)
+    {
+        return $user->isAdmin();
     }
 
     /**

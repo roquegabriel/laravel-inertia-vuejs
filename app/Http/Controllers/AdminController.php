@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
-use Inertia\Response;
 
 class AdminController extends Controller
 {
@@ -25,17 +26,34 @@ class AdminController extends Controller
 
     public function role(Request $request, User $user)
     {
+        Gate::authorize('modifyRole',$user);
         $request->validate(['role' => 'string|required']);
         $user->update(['role' => $request->role]);
         return redirect()->route('admin.index')->with('status', "User role changed to {$request->role} successfully");
     }
 
-    public function show(User $user): Response
+    public function show(User $user)
     {
-        $user_listings = $user->listings()->latest()->paginate(10);
+        $user_listings = $user
+            ->listings()
+            ->filter(request(['search', 'disapproved']))
+            ->latest()
+            ->paginate(5)
+            ->withQueryString();
         return Inertia::render('Admin/UserPage', [
             'user' => $user,
-            'listings' => $user_listings
+            'listings' => $user_listings,
+            'status' => session('status')
         ]);
+    }
+
+    public function approve(Listing $listing)
+    {
+        Gate::authorize('approve', $listing);
+        $listing->update([
+            'approved' => !$listing->approved
+        ]);
+        $message = $listing->approved ? 'approved' : 'disapproved';
+        return back()->with('status', "Listing {$message} successfully!");
     }
 }

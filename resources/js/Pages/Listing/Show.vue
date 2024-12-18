@@ -4,7 +4,7 @@ import Container from "../../Components/Container.vue";
 import { computed } from "vue";
 
 const page = usePage()
-const admin = computed(() => page.props.auth.user.role === 'admin')
+const admin = computed(() => page.props.auth.user && page.props.auth.user.role === 'admin')
 
 const props = defineProps({
     listing: Object,
@@ -16,6 +16,13 @@ const deleteListing = () => {
         router.delete(route('listing.destroy', props.listing.id))
     }
 }
+const toggleApprove = () => {
+    let message = props.listing.approved ? 'Disapprove this listing?' : 'Approve this listing?'
+    if (confirm(message)) {
+        router.put(route('admin.approve', props.listing.id))
+    }
+}
+
 </script>
 <template>
 
@@ -23,7 +30,7 @@ const deleteListing = () => {
     <!-- Admin -->
     <div v-if="admin" class="bg-slate-800 text-white mb-6 p-6 rounded-md font-medium flex items-center justify-between">
         <p>This listing is {{ listing.approved ? 'Approved': 'Disapproved' }}</p>
-        <button class="bg-slate-600 px-3 py-1 rounded-md">{{ listing.approved ? 'Disapprove it': 'Approve it' }}</button>
+        <button @click.prevent="toggleApprove" class="bg-slate-600 px-3 py-1 rounded-md">{{ listing.approved ? 'Disapprove it': 'Approve it' }}</button>
     </div>
     <Container class="flex gap-4">
         <div class="w-1/4 rounded-md overflow-hidden">
