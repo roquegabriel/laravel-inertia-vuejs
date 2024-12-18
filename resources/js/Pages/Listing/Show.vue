@@ -1,6 +1,11 @@
 <script setup>
-import { Head, Link, router } from "@inertiajs/vue3";
+import { Head, Link, router, usePage } from "@inertiajs/vue3";
 import Container from "../../Components/Container.vue";
+import { computed } from "vue";
+
+const page = usePage()
+const admin = computed(() => page.props.auth.user.role === 'admin')
+
 const props = defineProps({
     listing: Object,
     user: Object,
@@ -15,6 +20,11 @@ const deleteListing = () => {
 <template>
 
     <Head title=" Listing detail" />
+    <!-- Admin -->
+    <div v-if="admin" class="bg-slate-800 text-white mb-6 p-6 rounded-md font-medium flex items-center justify-between">
+        <p>This listing is {{ listing.approved ? 'Approved': 'Disapproved' }}</p>
+        <button class="bg-slate-600 px-3 py-1 rounded-md">{{ listing.approved ? 'Disapprove it': 'Approve it' }}</button>
+    </div>
     <Container class="flex gap-4">
         <div class="w-1/4 rounded-md overflow-hidden">
             <img :src="listing.image ? `/storage/${listing.image}` : `/storage/images/listing/default.png`" alt=""
