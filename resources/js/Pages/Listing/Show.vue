@@ -27,24 +27,24 @@ const closeDeleteModal = () => {
 }
 const deleteUser = () => {
     router.delete(route('listing.destroy', props.listing.id), {
-        onSuccess: () => closeModal(),
+        // onSuccess: () => closeModal(),
     });
 };
-
-const showModal = ref(false)
-const toggleApprove = () => {
-    router.put(route('admin.approve', props.listing.id), {
-        onFinish: closeModal()
-    })
-}
 const closeModal = () => {
     showModal.value = false
+}
+const showModal = ref(false)
+const toggleApprove = () => {
+    router.put(route('admin.approve', props.listing.id), {}, {
+        onSuccess: () => closeModal()
+    })
 }
 
 </script>
 <template>
-    <!-- Modal for updating-->
-    <Modal :show="showModal" @close="closeModal">
+    <!-- Admin -->
+    <!-- Modal for updating role-->
+    <Modal maxWidth="lg" :show="showModal" @close="closeModal">
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900">
                 {{ listing.approved ? 'Disapprove' : 'Approve' }} this listing?
@@ -56,7 +56,7 @@ const closeModal = () => {
         </div>
     </Modal>
     <!-- Modal for deleting-->
-    <Modal :show="confirmingUserDeletion" @close="closeDeleteModal">
+    <Modal maxWidth="lg" :show="confirmingUserDeletion" @close="closeDeleteModal">
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900">
                 Are you sure you want to delete your listing?

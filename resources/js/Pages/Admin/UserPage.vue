@@ -46,6 +46,7 @@ const showDisapproved = (e) => {
 }
 const showModal = ref(false)
 const listing = ref(null)
+
 const toggleApprove = (l) => {
     showModal.value = true
     listing.value = l
@@ -54,14 +55,14 @@ const closeModal = () => {
     showModal.value = false
 }
 const updateRole = () => {
-    router.put(route('admin.approve', listing.value), {
-        onFinish: closeModal(),
+    router.put(route('admin.approve', listing.value), {}, {
+        onSuccess: () => closeModal()
     })
 }
 </script>
 <template>
     <!-- Modal -->
-    <Modal :show="showModal" @close="closeModal">
+    <Modal maxWidth="lg" :show="showModal" @close="closeModal">
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900">
                 {{ listing.approved ? 'Disapprove' : 'Approve' }} this listing?

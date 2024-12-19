@@ -12,21 +12,19 @@ defineProps({
     status: String
 })
 let userId = null
-const confirmingUserDeletion = ref(false);
+const confirmingUserDeletion = ref(false)
 const confirmUserDeletion = (id) => {
-    confirmingUserDeletion.value = true;
+    confirmingUserDeletion.value = true
     userId = id
 };
 const closeModal = () => {
-    confirmingUserDeletion.value = false;
-
+    confirmingUserDeletion.value = false
 }
 const deleteUser = () => {
     router.delete(route('listing.destroy', userId), {
         onSuccess: () => closeModal(),
-    });
+    })
 };
-
 </script>
 <template>
     <!-- Modal -->

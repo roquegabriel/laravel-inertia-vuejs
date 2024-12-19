@@ -81,7 +81,7 @@ class ListingController extends Controller implements HasMiddleware
             $fields['image'] = Storage::disk('public')->put('images/listing', $request->image);
         }
 
-        $request->user()->listing()->create($fields);
+        $request->user()->listings()->create($fields);
 
         return redirect()->route('dashboard')->with('status', 'Listing created successfully');
     }

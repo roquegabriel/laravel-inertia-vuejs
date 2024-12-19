@@ -7,7 +7,6 @@ import PrimaryBtn from './PrimaryBtn.vue';
 const props = defineProps({
     user: Object
 })
-
 const form = useForm({
     role: props.user.role
 })
@@ -25,14 +24,12 @@ const showModal = () => {
 </script>
 <template>
     <!-- Modal -->
-    <Modal :show="confirmingSelection" @close="closeModal">
+    <Modal maxWidth="lg" :show="confirmingSelection" @close="closeModal">
         <div class="p-6">
-            <div class="flex flex-col items-center justify-center">
-                <h2 class="text-lg font-medium text-gray-900">Change this user's role to {{ form.role }}?</h2>
-                <div class="mt-3 space-x-6">
-                    <SecondaryButton @click="closeModal">Cancelar</SecondaryButton>
-                    <PrimaryBtn @click="confirmSelected" >Aceptar</PrimaryBtn>
-                </div>
+            <h2 class="text-lg font-medium text-gray-900">Change this user's role to {{ form.role }}?</h2>
+            <div class="mt-6 flex justify-end gap-4">
+                <SecondaryButton @click="closeModal">Cancelar</SecondaryButton>
+                <PrimaryBtn @click="confirmSelected">Aceptar</PrimaryBtn>
             </div>
         </div>
     </Modal>
