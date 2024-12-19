@@ -1,10 +1,12 @@
 <script setup>
 import { Head, Link, router } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import Title from '../Components/HeadingTitle.vue'
 import PaginationLinks from '../Components/PaginationLinks.vue'
 import Modal from '../Components/Modal.vue';
 import SessionMessages from '../Components/SessionMessages.vue';
-import { ref } from 'vue';
+import SecondaryButton from '../Components/SecondaryButton.vue'
+import DangerButton from '../Components/DangerButton.vue'
 defineProps({
     listings: Object,
     status: String
@@ -21,7 +23,6 @@ const closeModal = () => {
 }
 const deleteUser = () => {
     router.delete(route('listing.destroy', userId), {
-        preserveScroll: true,
         onSuccess: () => closeModal(),
     });
 };
@@ -34,17 +35,9 @@ const deleteUser = () => {
             <h2 class="text-lg font-medium text-gray-900">
                 Are you sure you want to delete your listing?
             </h2>
-            <div class="mt-6 flex justify-end">
-                <button @click="closeModal"
-                    class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                    Cancel
-                </button>
-
-                <button
-                    class="ms-3 inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-xs font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 active:bg-red-700"
-                    @click="deleteUser">
-                    Delete
-                </button>
+            <div class="mt-6 flex justify-end gap-4">
+                <SecondaryButton @click="closeModal">Cancel</SecondaryButton>
+                <DangerButton @click="deleteUser">Delete</DangerButton>
             </div>
         </div>
     </Modal>

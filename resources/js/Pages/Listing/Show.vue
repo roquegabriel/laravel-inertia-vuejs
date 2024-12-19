@@ -1,7 +1,11 @@
 <script setup>
 import { Head, Link, router, usePage } from "@inertiajs/vue3";
 import Container from "../../Components/Container.vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import Modal from "../../Components/Modal.vue";
+import SecondaryButton from "../../Components/SecondaryButton.vue";
+import PrimaryBtn from "../../Components/PrimaryBtn.vue";
+import DangerButton from "../../Components/DangerButton.vue";
 
 const page = usePage()
 const admin = computed(() => page.props.auth.user && page.props.auth.user.role === 'admin')
@@ -11,26 +15,65 @@ const props = defineProps({
     user: Object,
     canModify: Boolean
 })
-const deleteListing = () => {
-    if (confirm("Are you sure?")) {
-        router.delete(route('listing.destroy', props.listing.id))
-    }
+
+
+const confirmingUserDeletion = ref(false);
+const confirmUserDeletion = () => {
+    confirmingUserDeletion.value = true;
+};
+const closeDeleteModal = () => {
+    confirmingUserDeletion.value = false;
+
 }
+const deleteUser = () => {
+    router.delete(route('listing.destroy', props.listing.id), {
+        onSuccess: () => closeModal(),
+    });
+};
+
+const showModal = ref(false)
 const toggleApprove = () => {
-    let message = props.listing.approved ? 'Disapprove this listing?' : 'Approve this listing?'
-    if (confirm(message)) {
-        router.put(route('admin.approve', props.listing.id))
-    }
+    router.put(route('admin.approve', props.listing.id), {
+        onFinish: closeModal()
+    })
+}
+const closeModal = () => {
+    showModal.value = false
 }
 
 </script>
 <template>
+    <!-- Modal for updating-->
+    <Modal :show="showModal" @close="closeModal">
+        <div class="p-6">
+            <h2 class="text-lg font-medium text-gray-900">
+                {{ listing.approved ? 'Disapprove' : 'Approve' }} this listing?
+            </h2>
+            <div class="mt-6 flex justify-end gap-4">
+                <SecondaryButton @click="closeModal">Cancel</SecondaryButton>
+                <PrimaryBtn @click="toggleApprove">Aceptar</PrimaryBtn>
+            </div>
+        </div>
+    </Modal>
+    <!-- Modal for deleting-->
+    <Modal :show="confirmingUserDeletion" @close="closeDeleteModal">
+        <div class="p-6">
+            <h2 class="text-lg font-medium text-gray-900">
+                Are you sure you want to delete your listing?
+            </h2>
+            <div class="mt-6 flex justify-end gap-4">
+                <SecondaryButton @click="closeDeleteModal">Cancel</SecondaryButton>
+                <DangerButton @click="deleteUser">Delete</DangerButton>
+            </div>
+        </div>
+    </Modal>
 
     <Head title=" Listing detail" />
     <!-- Admin -->
     <div v-if="admin" class="bg-slate-800 text-white mb-6 p-6 rounded-md font-medium flex items-center justify-between">
-        <p>This listing is {{ listing.approved ? 'Approved': 'Disapproved' }}</p>
-        <button @click.prevent="toggleApprove" class="bg-slate-600 px-3 py-1 rounded-md">{{ listing.approved ? 'Disapprove it': 'Approve it' }}</button>
+        <p>This listing is {{ listing.approved ? 'approved' : 'disapproved' }}</p>
+        <button @click.prevent="showModal = true" class="bg-slate-600 px-3 py-1 rounded-md">{{ listing.approved ?
+            'Disapprove it' : 'Approve it' }}</button>
     </div>
     <Container class="flex gap-4">
         <div class="w-1/4 rounded-md overflow-hidden">
@@ -47,7 +90,7 @@ const toggleApprove = () => {
                         <Link :href="route('listing.edit', listing.id)"
                             class="bg-green-500 rounded-md text-white px-6 py-2 hover:outline outline-green-500 outline-offset-2">
                         Edit</Link>
-                        <button @click="deleteListing"
+                        <button @click="confirmUserDeletion"
                             class="bg-red-500 rounded-md text-white px-6 py-2 hover:outline outline-red-500 outline-offset-2">
                             Delete
                         </button>

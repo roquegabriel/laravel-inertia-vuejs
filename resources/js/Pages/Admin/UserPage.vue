@@ -4,7 +4,11 @@ import Title from '../../Components/HeadingTitle.vue'
 import InputField from '../../Components/InputField.vue';
 import PaginationLinks from '../../Components/PaginationLinks.vue';
 import SessionMessages from '../../Components/SessionMessages.vue';
-
+import Modal from '../../Components/Modal.vue';
+import PrimaryBtn from '../../Components/PrimaryBtn.vue';
+import SecondaryButton from '../../Components/SecondaryButton.vue';
+import { ref } from 'vue';
+import { list } from 'postcss';
 const props = defineProps({
     user: Object,
     listings: Object,
@@ -40,19 +44,38 @@ const showDisapproved = (e) => {
         }))
     }
 }
-
-const toggleApprove = (listing) => {
-    let message = listing.approved ? 'Disapprove this listing?' : 'Approve this listing?'
-    if (confirm(message)) {
-        router.put(route('admin.approve', listing.id))
-    }
+const showModal = ref(false)
+const listing = ref(null)
+const toggleApprove = (l) => {
+    showModal.value = true
+    listing.value = l
+}
+const closeModal = () => {
+    showModal.value = false
+}
+const updateRole = () => {
+    router.put(route('admin.approve', listing.value), {
+        onFinish: closeModal(),
+    })
 }
 </script>
 <template>
+    <!-- Modal -->
+    <Modal :show="showModal" @close="closeModal">
+        <div class="p-6">
+            <h2 class="text-lg font-medium text-gray-900">
+                {{ listing.approved ? 'Disapprove' : 'Approve' }} this listing?
+            </h2>
+            <div class="mt-6 flex justify-end gap-4">
+                <SecondaryButton @click="closeModal">Cancel</SecondaryButton>
+                <PrimaryBtn @click="updateRole">Aceptar</PrimaryBtn>
+            </div>
+        </div>
+    </Modal>
 
     <Head :title="`${user.name} Listings`" />
     <!-- Session flash message -->
-     <SessionMessages :status="status" />
+    <SessionMessages :status="status" />
     <!-- Heading -->
     <div class="mb-6">
         <Title>{{ user.name }} Latest</Title>
