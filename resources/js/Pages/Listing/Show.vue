@@ -27,7 +27,6 @@ const closeDeleteModal = () => {
 }
 const deleteUser = () => {
     router.delete(route('listing.destroy', props.listing.id), {
-        // onSuccess: () => closeModal(),
     });
 };
 const closeModal = () => {
