@@ -41,7 +41,7 @@ const toggleRole = (e) => {
     <Head title="Admin" />
     <SessionMessages :status="status" />
     <!-- Heading -->
-    <div class="flex items-end justify-between mb-4">
+    <div class="sm:flex items-end justify-between mb-4 grid">
         <div class="flex items-end gap-2">
             <!-- Search -->
             <form @submit.prevent="search">
@@ -61,46 +61,49 @@ const toggleRole = (e) => {
         </div>
     </div>
     <!-- Table -->
-    <table class="bg-white table-fixed dark:bg-slate-800 w-full rounded-lg overflow-hidden ring-1 ring-slate-300">
-        <thead>
-            <tr class="bg-slate-600 text-slate-300 uppercase text-xs text-left">
-                <th class="w-3/6 p-3">Name</th>
-                <th class="w-2/6 p-3">Role</th>
-                <th class="w-1/5 p-3">Listings</th>
-                <th class="w-1/5 p-3 text-right">View</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-slate-300 divide-dashed">
-            <tr v-for="user in users.data" :key="user.id">
-                <td class="w-3/6 py-5 px-3">
-                    <p class="font-bold mb-1">{{ user.name }}</p>
-                    <p class="font-light text-xs">{{ user.email }}</p>
-                </td>
-                <td class="w-2/6 py-5 px-3">
-                    <!-- {{ user.role }} -->
-                    <RoleSelect :user="user" />
-                </td>
-                <td class="w-1/5 py-5 px-3">
-                    <div class="flex items-center gap-6">
-                        <div class="flex items-center gap-1">
-                            <p>{{ user.listings.filter((i) => i.approved).length }}</p>
-                            <font-awesome-icon icon="circle-check" class="text-green-500" />
+    <div class="overflow-y-scroll sm:overflow-hidden">
+
+        <table class="bg-white table-auto dark:bg-slate-800 w-full rounded-lg overflow-hidden ring-1 ring-slate-300 ">
+            <thead>
+                <tr class="bg-slate-600 text-slate-300 uppercase text-xs text-left">
+                    <th class="w-3/6 p-3">Name</th>
+                    <th class="w-1/6 p-3">Role</th>
+                    <th class="w-1/6 p-3">Listings</th>
+                    <th class="w-1/12 p-3 text-right">View</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-300 divide-dashed">
+                <tr v-for="user in users.data" :key="user.id">
+                    <td class="w-3/6 py-5 px-3">
+                        <p class="font-bold mb-1">{{ user.name }}</p>
+                        <p class="font-light text-xs">{{ user.email }}</p>
+                    </td>
+                    <td class="w-1/6 py-5 px-3">
+                        <!-- Select -->
+                        <RoleSelect :user="user" />
+                    </td>
+                    <td class="w-1/6 py-5 px-3">
+                        <div class="flex items-center gap-6">
+                            <div class="flex items-center gap-1">
+                                <p>{{ user.listings.filter((i) => i.approved).length }}</p>
+                                <font-awesome-icon icon="circle-check" class="text-green-500" />
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <p>{{ user.listings.filter(i => !i.approved).length }}</p>
+                                <font-awesome-icon icon="circle-xmark" class="text-red-500" />
+                            </div>
                         </div>
-                        <div class="flex items-center gap-1">
-                            <p>{{ user.listings.filter(i => !i.approved).length }}</p>
-                            <font-awesome-icon icon="circle-xmark" class="text-red-500" />
-                        </div>
-                    </div>
-                </td>
-                <td class="w-1/5 py-5 px-3 text-right">
-                    <Link :href="route('user.show', user.id)" class="px-3 text-indigo-400">
-                    <font-awesome-icon icon="up-right-from-square" />
-                    </Link>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="mt-6">
-        <PaginationLinks :paginator="users" />
+                    </td>
+                    <td class="w-1/12 py-5 px-3 text-right">
+                        <Link :href="route('user.show', user.id)" class="px-3 text-indigo-400">
+                        <font-awesome-icon icon="up-right-from-square" />
+                        </Link>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="my-6">
+            <PaginationLinks :paginator="users" />
+        </div>
     </div>
 </template>

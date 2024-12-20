@@ -69,7 +69,7 @@ const updateRole = () => {
             </h2>
             <div class="mt-6 flex justify-end gap-4">
                 <SecondaryButton @click="closeModal">Cancel</SecondaryButton>
-                <PrimaryBtn @click="updateRole">Aceptar</PrimaryBtn>
+                <PrimaryBtn @click="updateRole" class="w-fit">Aceptar</PrimaryBtn>
             </div>
         </div>
     </Modal>
@@ -80,7 +80,7 @@ const updateRole = () => {
     <!-- Heading -->
     <div class="mb-6">
         <Title>{{ user.name }} Latest</Title>
-        <div class="flex items-end justify-between">
+        <div class="flex sm:items-center sm:flex-row gap-2 justify-between flex-col items-start">
             <div class="flex items-end gap-2">
                 <!-- Search -->
                 <form @submit.prevent="search">
@@ -99,7 +99,7 @@ const updateRole = () => {
                 <input :checked="params.disapproved" @input="showDisapproved" type="checkbox" id="showDisapproved"
                     class="rounded-md border-1 outline-0 text-indigo-500 ring-indigo-500 border-slate-700 cursor-pointer">
                 <label for="showDisapproved"
-                    class="block text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">Show disapproved
+                    class="block text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">Show disapproved
                     listings</label>
             </div>
         </div>

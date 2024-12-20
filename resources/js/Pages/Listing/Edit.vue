@@ -31,7 +31,7 @@ const form = useForm({
         </div>
         <ErrorMessages :errors="form.errors" />
         <form @submit.prevent="form.post(route('listing.update', listing.id))">
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 gap-6">
                 <InputField label="Title" icon="heading" placeholder="My new listing" v-model="form.title" />
                 <InputField label="Tags (separate with comma)" icon="tags" placeholder="one, two, three"
                     v-model="form.tags" />

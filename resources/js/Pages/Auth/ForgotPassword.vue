@@ -20,7 +20,7 @@ const submit = () => {
 
     <Head :title="$page.component.split('/')[1]" />
 
-    <Container class="w-1/2">
+    <Container class="w-full md:w-1/2 p-2">
 
         <div class="mb-8 text-center">
             <p>Forgot your password? No problem. Just let us know your email address and we will email you a password

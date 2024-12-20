@@ -50,7 +50,7 @@ const deleteUser = () => {
                 <!-- Heading -->
                 <div class="flex items-center justify-between mb-4">
                     <Title>Your latest listings</Title>
-                    <div class="flex items-center gap-4 text-xs">
+                    <div class="md:flex md:items-center md:gap-4 text-xs sm:grid">
                         <p>Approved <font-awesome-icon icon="check-circle" class="text-green-500" /></p>
                         <p>Pending approved <font-awesome-icon icon="circle-xmark" class="text-red-500" /></p>
                     </div>
@@ -60,10 +60,10 @@ const deleteUser = () => {
                     class="w-full table-fixed border-collapse overflow-hidden rounded-md text-sm ring-1 ring-slate-300 dark:ring-slate-600 bg-white shadow-lg">
                     <thead class="bg-slate-300 text-xs uppercase text-slate-600 dark:text-slate-400 dark:bg-slate-900">
                         <tr>
-                            <th class="w-3/4 p-3 text-left">Listing title</th>
-                            <th class="w-1/4 py-3 pr-3 text-right">View</th>
-                            <th class="w-1/5 py-3 pr-3 text-right">Edit</th>
-                            <th class="w-1/5 py-3 pr-3 text-right">Delete</th>
+                            <th class="w-1/2 p-3 text-left">Listing title</th>
+                            <th class="w-1/6 py-3 pr-3 text-right">View</th>
+                            <th class="w-1/6 py-3 pr-3 text-right">Edit</th>
+                            <th class="w-1/6 py-3 pr-3 text-right">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,7 +72,7 @@ const deleteUser = () => {
                             <td class="w-3/4 p-3 text-left">
                                 <div class="flex items-center gap-2">
                                     <img :src="listing.image ? `/storage/${listing.image}` : `/storage/images/listing/default.png`"
-                                        class="size-10 rounded-full object-cover object-center" alt="">
+                                        class="size-10 rounded-full object-cover object-center hidden md:inline" alt="">
                                     <h4>{{ listing.title }} <font-awesome-icon
                                             :icon="`${listing.approved ? 'circle-check' : 'circle-xmark'}`"
                                             :class="{ 'text-green-500': listing.approved, 'text-red-500': !listing.approved }" />

@@ -14,7 +14,7 @@ const makeLabel = (label) => {
 }
 </script>
 <template>
-    <div class="flex justify-between items-start">
+    <div class="flex flex-col items-start sm:flex-row justify-between sm:items-center gap-2">
         <div class="flex items-center rounded-md overflow-hidden shadow-md">
             <div v-for="(link, index) in paginator.links" :key="index">
                 <component :is="link.url ? Link : 'span'" :href="link.url" v-html="makeLabel(link.label)"

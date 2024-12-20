@@ -63,7 +63,7 @@ const show = ref(false)
             </div>
         </nav>
     </header>
-    <main class="p-6 mx-auto max-w-screen-lg">
+    <main class="p-2 md:p-6 mx-auto max-w-screen-lg">
         <slot />
     </main>
 </template>
