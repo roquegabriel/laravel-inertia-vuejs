@@ -29,8 +29,8 @@ const resendEmail = (e) => {
         </div>
         <ErrorMessages :errors="form.errors" />
         <form @submit.prevent="form.patch(route('profile.info'))" class="space-y-6">
-            <InputField label="Name" icon="id-badge" class="w-1/2" v-model="form.name" />
-            <InputField label="Email" icon="at" class="w-1/2" v-model="form.email" />
+            <InputField label="Name" icon="id-badge" class="w-full sm:w-1/2" v-model="form.name" />
+            <InputField label="Email" icon="at" class="w-full sm:w-1/2" v-model="form.email" />
 
             <div v-if="user.email_verified_at === null" class="flex flex-col">
                 <SessionMessages :status="status"/>

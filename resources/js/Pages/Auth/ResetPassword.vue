@@ -29,7 +29,7 @@ const submit = () => {
 <template>
 
     <Head :title="$page.component.split('/')[1]" />
-    <Container class="w-1/2">
+    <Container class="w-full sm:w-1/2 p-2">
         <div class="mb-8 text-center">
             <Title>Enter your new password</Title>
         </div>

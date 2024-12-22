@@ -69,7 +69,7 @@ const updateRole = () => {
             </h2>
             <div class="mt-6 flex justify-end gap-4">
                 <SecondaryButton @click="closeModal">Cancel</SecondaryButton>
-                <PrimaryBtn @click="updateRole" class="w-fit">Aceptar</PrimaryBtn>
+                <PrimaryBtn @click="updateRole" class="!w-fit">Aceptar</PrimaryBtn>
             </div>
         </div>
     </Modal>

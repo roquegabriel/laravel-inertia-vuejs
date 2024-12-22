@@ -32,10 +32,10 @@ const submit = () => {
         </div>
         <ErrorMessages :errors="form.errors" />
         <form class="space-y-6" @submit.prevent="submit">
-            <InputField label="Current Password" icon="key" class="w-1/2" v-model="form.current_password"
+            <InputField label="Current Password" icon="key" class="w-full sm:w-1/2" v-model="form.current_password"
                 type="password" />
-            <InputField label="New Password" icon="key" class="w-1/2" v-model="form.password" type="password" />
-            <InputField label="Confirm Password" icon="key" class="w-1/2" v-model="form.password_confirmation"
+            <InputField label="New Password" icon="key" class="w-full sm:w-1/2" v-model="form.password" type="password" />
+            <InputField label="Confirm Password" icon="key" class="w-full sm:w-1/2" v-model="form.password_confirmation"
                 type="password" />
                 <p v-if="form.recentlySuccessful" class="text-green-500 font-medium">Saved!</p>
             <PrimaryBtn :disabled="form.processing">Save</PrimaryBtn>

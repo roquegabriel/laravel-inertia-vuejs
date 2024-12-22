@@ -29,7 +29,7 @@ const showModal = () => {
             <h2 class="text-lg font-medium text-gray-900">Change this user's role to {{ form.role }}?</h2>
             <div class="mt-6 flex justify-end gap-4">
                 <SecondaryButton @click="closeModal">Cancelar</SecondaryButton>
-                <PrimaryBtn @click="confirmSelected" class="w-fit">Aceptar</PrimaryBtn>
+                <PrimaryBtn @click="confirmSelected" class="!w-fit">Aceptar</PrimaryBtn>
             </div>
         </div>
     </Modal>

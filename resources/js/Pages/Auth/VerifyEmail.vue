@@ -17,7 +17,7 @@ const submit = () => {
 <template>
 
     <Head title="Email Verification" />
-    <Container class="w-1/2">
+    <Container class="w-full sm:w-1/2 p-2">
         <div class="mb-8">
             <p>Thanks for signing up! Before getting started, could you verify your email address by clicking on the
                 link we
