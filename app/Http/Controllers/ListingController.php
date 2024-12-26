@@ -35,6 +35,7 @@ class ListingController extends Controller implements HasMiddleware
             ->filter(request(['search', 'user_id', 'tag']))
             ->latest()
             ->paginate(6)
+            ->onEachSide(2)
             ->withQueryString();
         return Inertia::render('Home', [
             'listings' => $listings,
